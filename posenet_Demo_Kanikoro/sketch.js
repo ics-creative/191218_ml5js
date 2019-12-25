@@ -81,18 +81,21 @@ function drawSkeleton() {
 
 // 右手のかにクリームコロッケ
 function drawKanikoroR() {
+  console.log(poses)
   for(let i = 0; i < poses.length; i++) {
     const rightWrist = poses[i].pose.rightWrist
     const rightWristVector = createVector(rightWrist.x, rightWrist.y)
     const rightElbow = poses[i].pose.rightElbow
     const rightElbowVector = createVector(rightElbow.x, rightElbow.y)
-    const vy = createVector(0, 1)
-
     const rightHandVector = createVector(rightWristVector.x - rightElbowVector.x, rightWristVector.y - rightElbowVector.y)
-    let rightAngle = rightHandVector.angleBetween(vy)
+
+    const dx = rightWristVector.x - rightElbowVector.x
+    const dy = rightWristVector.y - rightElbowVector.y
+
+    const angle = atan(-dx/dy)
     push()
     translate(rightWrist.x + rightHandVector.x /10, rightWrist.y + rightHandVector.y/10)
-    rotate(Math.PI + rightAngle)
+    rotate(angle)
     image(kanikoro, -75, -150, 150, 250)
     pop()
   }
@@ -106,14 +109,17 @@ function drawKanikoroL() {
     const leftWristVector = createVector(leftWrist.x, leftWrist.y)
     const leftElbow = poses[i].pose.leftElbow
     const leftElbowVector = createVector(leftElbow.x, leftElbow.y)
-    const vy = createVector(0, 1)
 
     const leftHandVector = createVector(leftWristVector.x - leftElbowVector.x, leftWristVector.y - leftElbowVector.y)
-    let leftAngle = leftHandVector.angleBetween(vy)
+
+    const dx = leftWristVector.x - leftElbowVector.x
+    const dy = leftWristVector.y - leftElbowVector.y
+
+    const angle = atan(-dx/dy)
 
     push()
-    translate(leftWrist.x, leftWrist.y)
-    rotate(Math.PI + leftAngle)
+    translate(leftWrist.x + leftHandVector.x /10, leftWrist.y + leftHandVector.y/10)
+    rotate(angle)
     image(kanikoro, -75, -150, 150, 250)
     pop()
   }
