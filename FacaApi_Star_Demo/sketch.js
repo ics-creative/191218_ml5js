@@ -45,8 +45,6 @@ function gotResults(err, result) {
             // console.log(detections)
             drawBox(detections)
             drawLandmarks(detections)
-            // 顔の面積を取得します
-            setFaceArea(detections)
         }
 
     }
@@ -60,6 +58,8 @@ function drawBox(detections) {
         const y = alignedRect._box._y
         const boxWidth = alignedRect._box._width
         const boxHeight = alignedRect._box._height
+        // 顔の面積を取得します
+        setStarSize(detections[i]);
 
         noFill();
         stroke(161, 95, 251);
@@ -96,7 +96,7 @@ function drawLandmarks(detections) {
 
 // 星を作成するクラスです
 // 参考：p5.js example https://p5js.org/examples/form-star.html
-class Star{
+class Star {
     constructor(x, y, radius1, radius2, npoints, LR) {
         this.x = x
         this.y = y
@@ -106,15 +106,16 @@ class Star{
         this.radius2 = radius2
         this.npoints = npoints
         // 星の色をランダムに決定
-        this.color= color(Math.random()*255,Math.random()*255,Math.random()*255)
+        this.color = color(Math.random() * 255, Math.random() * 255, Math.random() * 255)
         // 逆の目の方向に星が飛ばないように
-        if(LR === "L"){
+        if (LR === "L") {
             this.angleX = Math.random() * -10
-        }else {
+        } else {
             this.angleX = Math.random() * 10
         }
     }
-    draw(){
+
+    draw() {
         let angle = TWO_PI / this.npoints;
         let halfAngle = angle / 2.0;
         fill(this.color)
@@ -132,7 +133,7 @@ class Star{
         endShape(CLOSE);
 
         // 星を回転させながら落とす
-        this.vy +=  3
+        this.vy += 3
         this.y += this.vy
         this.x += this.angleX
     }
@@ -146,23 +147,21 @@ function drawStar(eye, LR) {
     stars.forEach(star => {
         star.draw()
     })
-    if(stars.length > 100) stars.shift()
+    if (stars.length > 100) stars.shift()
 }
 
-// 顔の面積を取得します
-function setFaceArea(detections) {
-    for (let i = 0; i < detections.length; i++) {
-        const alignedRect = detections[i].alignedRect;
-        const boxWidth = alignedRect._box._width
-        const boxHeight = alignedRect._box._height
-        starSize = boxHeight / 10
-    }
+// 顔の面積を星の大きさに変換します
+function setStarSize(detection) {
+    const alignedRect = detection.alignedRect;
+    const boxWidth = alignedRect._box._width
+    const boxHeight = alignedRect._box._height
+    starSize = boxHeight / 10
 }
 
 // 複数の座標の中心を取得する関数です
 function getCenter(arr) {
-    const sumX = arr.reduce((sum, item) => sum + item._x , 0)
-    const sumY = arr.reduce((sum, item) =>  sum + item._y , 0)
+    const sumX = arr.reduce((sum, item) => sum + item._x, 0)
+    const sumY = arr.reduce((sum, item) => sum + item._y, 0)
     const avgX = sumX / arr.length
     const avgY = sumY / arr.length
     return {avgX, avgY}
