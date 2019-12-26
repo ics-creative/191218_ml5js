@@ -12,11 +12,8 @@ const detection_options = {
 
 
 function setup() {
-    if(windowWidth < windowHeight){
-        createCanvas(windowWidth, windowWidth * 2);
-    }else {
-        createCanvas(1024, 768);
-    }
+
+    createCanvas(1024, 768);
     // load up your video
     video = createCapture(VIDEO);
     video.size(width, height);
@@ -43,7 +40,7 @@ function gotResults(err, result) {
 
     // background(220);
     background(255);
-    image(video, 0, 0, width, width * video.height / video.width)
+    image(video, 0, 0, width, height)
     if (detections) {
         if (detections.length > 0) {
             // console.log(detections)
