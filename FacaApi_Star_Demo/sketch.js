@@ -12,7 +12,7 @@ const detection_options = {
 
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(windowWidth, windowWidth * 9 / 16);
 
     // load up your video
     video = createCapture(VIDEO);
