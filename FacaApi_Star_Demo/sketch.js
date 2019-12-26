@@ -154,7 +154,6 @@ function drawStar(eye, LR) {
 // 顔の面積を星の大きさに変換します
 function setStarSize(detection) {
     const alignedRect = detection.alignedRect;
-    const boxWidth = alignedRect._box._width
     const boxHeight = alignedRect._box._height
     starSize = boxHeight / 10
 }
