@@ -94,7 +94,7 @@ function drawKanikoroR() {
 
     const angle = atan(-dx/dy)
     push()
-    translate(rightWrist.x + rightHandVector.x /10, rightWrist.y + rightHandVector.y/10)
+    translate(rightWrist.x + rightHandVector.x , rightWrist.y + rightHandVector.y)
     rotate(angle)
     image(kanikoro, -75, -150, 150, 250)
     pop()
@@ -118,7 +118,7 @@ function drawKanikoroL() {
     const angle = atan(-dx/dy)
 
     push()
-    translate(leftWrist.x + leftHandVector.x /10, leftWrist.y + leftHandVector.y/10)
+    translate(leftWrist.x + leftHandVector.x * 10 , leftWrist.y + leftHandVector.y * 10)
     rotate(angle)
     image(kanikoro, -75, -150, 150, 250)
     pop()

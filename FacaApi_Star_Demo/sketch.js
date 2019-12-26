@@ -25,6 +25,7 @@ function setup() {
 function modelReady() {
     console.log('ready!')
     console.log(faceapi)
+    select('#status').html('Model Loaded');
     faceapi.detect(gotResults)
 
 }
