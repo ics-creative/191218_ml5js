@@ -13,7 +13,7 @@ const detection_options = {
 
 function setup() {
 
-    createCanvas(1024, 768);
+    createCanvas(windowWidth, windowHeight);
     // load up your video
     video = createCapture(VIDEO);
     video.size(width, height);
@@ -110,9 +110,9 @@ class Star {
         this.color = color(Math.random() * 255, Math.random() * 255, Math.random() * 255)
         // 逆の目の方向に星が飛ばないように
         if (LR === "L") {
-            this.angleX = Math.random() * -10
+            this.vx = Math.random() * -10
         } else {
-            this.angleX = Math.random() * 10
+            this.vx = Math.random() * 10
         }
     }
 
@@ -133,10 +133,10 @@ class Star {
         }
         endShape(CLOSE);
 
-        // 星を回転させながら落とす
+        // 星を落とす
         this.vy += 3
         this.y += this.vy
-        this.x += this.angleX
+        this.x += this.vx
     }
 }
 
