@@ -12,7 +12,7 @@ const detection_options = {
 
 
 function setup() {
-    createCanvas(windowWidth, windowWidth * 9 / 16);
+    createCanvas(1920, 1080);
 
     // load up your video
     video = createCapture(VIDEO);
@@ -40,7 +40,7 @@ function gotResults(err, result) {
 
     // background(220);
     background(255);
-    image(video, 0, 0, width, height)
+    image(video, 0, 0, width, width * video.height / video.width)
     if (detections) {
         if (detections.length > 0) {
             // console.log(detections)
