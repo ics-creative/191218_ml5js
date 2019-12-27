@@ -59,8 +59,6 @@ function drawBox(detections) {
         const y = alignedRect._box._y
         const boxWidth = alignedRect._box._width
         const boxHeight = alignedRect._box._height
-        // 顔の面積を取得します
-        setStarSize(detections[i]);
 
         noFill();
         stroke(161, 95, 251);
@@ -76,6 +74,8 @@ function drawLandmarks(detections) {
     strokeWeight(2)
 
     for (let i = 0; i < detections.length; i++) {
+        // setStarSizeで星の大きさを決定します
+        setStarSize(detections[i]);
         // const mouth = detections[i].parts.mouth;
         // const nose = detections[i].parts.nose;
         const leftEye = detections[i].parts.leftEye;
